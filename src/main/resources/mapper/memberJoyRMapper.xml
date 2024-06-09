@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joy.record.mapper.MemberJoyRMapper">
+
+    <!-- 회원 취미 목록 조회 -->
+    <select id="selectMemberJoyRList" parameterType="HashMap" resultType="Joy">
+        SELECT
+        MJ.MEMBER_ID
+        , MJ.JOY_ID
+        , J.NAME
+        , J.DETAIL
+        , J.DEL_YN
+        FROM JOY J
+        LEFT OUTER JOIN MEMBER_JOY_R MJ
+        ON J.JOY_ID = MJ.JOY_ID
+        <where>
+            MEMBER_ID = #{member_id}
+            <if test='del_yn != null and  del_yn != ""'>
+                AND J.DEL_YN = #{del_yn}
+            </if>
+        </where>
+    </select>
+
+
+
+    <!-- 회원 취미 등록 -->
+    <insert id="insertMemberJoyR" parameterType="HashMap">
+        INSERT INTO MEMBER_JOY_R
+        (MEMBER_ID
+        , JOY_ID
+        <if test='color != null and color != ""'>
+            , COLOR
+        </if>
+        )
+        VALUES
+        (#{member_id}
+        , #{joy_id}
+        <if test='color != null and color != ""'>
+            , #{color}
+        </if>
+        )
+    </insert>
+
+    <!-- 회원 취미 수정 -->
+    <update id="updateMemberJoyR" parameterType="HashMap" >
+        UPDATE MEMBER_JOY_R
+        <set>
+            COLOR = '${color}',
+        </set>
+        WHERE MEMBER_ID = #{member_id}
+        AND JOY_ID = #{joy_id}
+    </update>
+
+    <!-- 회원 취미 삭제  -->
+    <delete id="deleteMemberJoyR" parameterType="HashMap" >
+        DELETE MEMBER_JOY_R
+        WHERE MEMBER_ID = #{member_id}
+        AND JOY_ID = #{joy_id}
+    </delete>
+</mapper>

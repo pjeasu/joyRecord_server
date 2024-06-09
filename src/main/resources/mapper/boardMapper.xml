@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joy.record.mapper.BoardMapper">
+
+    <!-- 게시글 목록 조회 -->
+    <select id="selectBoardList" parameterType="HashMap" resultType="Board">
+        SELECT
+         BOARD_ID
+        , TITLE
+        , BOARD_TEXT
+        , JOY_DATE
+        , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
+        , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , B.DEL_YN
+        , B.MEMBER_ID
+        , M.USER_ID
+        , J.JOY_ID
+        , J.NAME
+        FROM BOARD B
+        LEFT OUTER JOIN MEMBER M
+        ON B.MEMBER_ID = M.MEMBER_ID
+        LEFT OUTER JOIN JOY J
+        ON B.JOY_ID = J.JOY_ID
+        <where>
+            <if test='del_yn != null and  del_yn != ""'>
+                AND B.DEL_YN = #{del_yn}
+            </if>
+        </where>
+    </select>
+
+    <!-- 게시글 단일 조회 -->
+    <select id="selectBoardOne" parameterType="HashMap" resultType="Board">
+        SELECT
+        BOARD_ID
+        , TITLE
+        , BOARD_TEXT
+        , JOY_DATE
+        , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
+        , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , B.DEL_YN
+        , B.MEMBER_ID
+        , M.USER_ID
+        , J.JOY_ID
+        , J.NAME
+        FROM BOARD B
+        LEFT OUTER JOIN MEMBER M
+        ON B.MEMBER_ID = M.MEMBER_ID
+        LEFT OUTER JOIN JOY J
+        ON B.JOY_ID = J.JOY_ID
+        <where>
+            BOARD_ID = #{board_id}
+        </where>
+    </select>
+
+    <!-- 게시글 등록 -->
+    <insert id="insertBoard" parameterType="HashMap">
+        INSERT INTO BOARD
+        (BOARD_ID
+        , TITLE
+        , BOARD_TEXT
+        , JOY_DATE
+        , CREATED_DATE
+        , DEL_YN
+        , MEMBER_ID
+        <if test='joy_id != null and joy_id != ""'>
+           , JOY_ID
+        </if>
+        <if test='file_id != null and file_id != ""'>
+           , FILE_ID
+        </if>
+        )
+        VALUES
+        (
+        NEXT VALUE FOR [dbo].[board_seq]
+        , #{title}
+        , #{board_text}
+        , #{joy_date}
+        , GETDATE()
+        , 'N'
+        , #{member_id}
+        <if test='joy_id != null and joy_id != ""'>
+            , #{joy_id}
+        </if>
+        <if test='file_id != null and file_id != ""'>
+            , #{file_id}
+        </if>
+        )
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateBoard" parameterType="HashMap" >
+        UPDATE BOARD
+        <set>
+            <if test='title != null and title != ""'>
+                TITLE = #{title},
+            </if>
+            <if test='board_text != null and board_text != ""'>
+                BOARD_TEXT = #{board_text},
+            </if>
+            <if test='joy_date != null and joy_date != ""'>
+                JOY_DATE = #{joy_date},
+            </if>
+            <if test='joy_id != null and joy_id != ""'>
+                JOY_ID = #{joy_id},
+            </if>
+            MODIFIED_DATE = GETDATE()
+        </set>
+        WHERE BOARD_ID = #{board_id}
+    </update>
+
+    <!-- 게시글 삭제 (DEL_YN : Y 수정) -->
+    <update id="deleteBoard" parameterType="HashMap" >
+        UPDATE BOARD
+        <set>
+            DEL_YN = 'Y',
+            MODIFIED_DATE = GETDATE()
+        </set>
+        WHERE BOARD_ID = #{board_id}
+    </update>
+</mapper>
