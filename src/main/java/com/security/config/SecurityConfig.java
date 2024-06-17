@@ -27,7 +27,7 @@ public class SecurityConfig  {
 
 
     private static final String[] AUTH_WHITELIST = {
-              "/api-docs", "/api/auth/**",  "/api-docs/**"
+              "/files/**", "/api-docs", "/api/auth/**",  "/api-docs/**"
     };
 
     @Bean
