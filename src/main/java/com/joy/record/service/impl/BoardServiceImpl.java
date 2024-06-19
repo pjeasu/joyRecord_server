@@ -28,10 +28,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int insertBoard(HashMap<String, Object> param) {
+        System.out.println(param);
         return boardMapper.insertBoard(param);
     }
     @Override
     public int updateBoard(HashMap<String, Object> param) {
+
         return boardMapper.updateBoard(param);
     }
 

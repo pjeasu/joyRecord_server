@@ -17,7 +17,7 @@
         , B.MEMBER_ID
         , M.USER_ID
         , J.JOY_ID
-        , J.NAME
+        , J.JOY_NAME
         FROM BOARD B
         LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID
@@ -43,7 +43,7 @@
         , B.MEMBER_ID
         , M.USER_ID
         , J.JOY_ID
-        , J.NAME
+        , J.JOY_NAME
         FROM BOARD B
         LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID

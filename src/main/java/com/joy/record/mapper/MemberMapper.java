@@ -19,8 +19,12 @@ public interface MemberMapper {
     /** 회원가입 로그인 관련 **/
     //아이디로 회원 데이터 조회
     Member findByUsername(String user_id);
+
     //회원 pk로 회원정보 조회
     Optional<Member> selectMemberOne(int member_id);
+
+    //중복 아이디 체크
+    int countMemberId(HashMap<String, Object> param);
 
 
 }

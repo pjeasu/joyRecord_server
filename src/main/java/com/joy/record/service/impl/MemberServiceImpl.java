@@ -42,6 +42,8 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.deleteMember(param);
     }
 
-
-
+    @Override
+    public int countMemberId(HashMap<String, Object> param){
+        return memberMapper.countMemberId(param);
+    }
 }
