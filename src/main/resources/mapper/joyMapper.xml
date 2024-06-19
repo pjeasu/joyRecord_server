@@ -8,7 +8,7 @@
     <select id="selectJoyList" parameterType="HashMap" resultType="Joy">
         SELECT
          JOY_ID
-        , NAME
+        , JOY_NAME
         , DETAIL
         , DEL_YN
         FROM JOY
@@ -24,14 +24,14 @@
     <insert id="insertJoy" parameterType="HashMap">
         INSERT INTO JOY
         (JOY_ID
-        , NAME
+        , JOY_NAME
         , DETAIL
         , DEL_YN
         )
         VALUES
         (
         NEXT VALUE FOR [dbo].[joy_seq]
-        , #{name}
+        , #{joy_name}
         , #{detail}
         , 'N'
         )
@@ -41,8 +41,8 @@
     <update id="updateJoy" parameterType="HashMap" >
         UPDATE JOY
         <set>
-            <if test='name != null and name != ""'>
-                NAME = #{name},
+            <if test='joy_name != null and joy_name != ""'>
+                JOY_NAME = #{joy_name},
             </if>
             <if test='detail != null and detail != ""'>
                 DETAIL = #{detail},
