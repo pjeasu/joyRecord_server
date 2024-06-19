@@ -29,24 +29,20 @@ public class BoardController {
 
     @PostMapping("/insertBoard")
     public HashMap<String, Object> insertBoard(@RequestParam HashMap<String, Object> param) {
-        System.out.println("insertBoard");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", boardService.insertBoard(param));
-        System.out.println(result);
         return result;
     }
-
     @PutMapping("/updateBoard")
-    public HashMap<String, Object> updateBoard(@RequestParam HashMap<String, Object> param) {
-        System.out.println("updateBoard");
+    public HashMap<String, Object> updateBoard(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", boardService.updateBoard(param));
         return result;
     }
 
+
     @PutMapping("/deleteBoard")
     public HashMap<String, Object> deleteBoard(@RequestParam HashMap<String, Object> param) {
-        System.out.println("deleteBoard");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", boardService.deleteBoard(param));
         return result;

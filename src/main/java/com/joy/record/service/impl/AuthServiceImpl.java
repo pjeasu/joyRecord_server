@@ -58,6 +58,7 @@ public class AuthServiceImpl implements AuthService {
         HashMap<String, Object> memData = new HashMap<>();
         memData.put("token" , accessToken);
         memData.put("user_id" , info.getUser_id());
+        memData.put("member_id" , info.getMember_id());
         memData.put("user_role" , info.getRole());
 
 

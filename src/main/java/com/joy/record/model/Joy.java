@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class Joy {
     private int joy_id;
-    private String name;
+    private String joy_name;
     private String detail;
     private String del_yn;
     private int member_id;

@@ -23,16 +23,13 @@ public class MemberJoyRController {
 
     @PostMapping("/insertMemberJoyR")
     public HashMap<String, Object> insertMemberJoyR(@RequestParam HashMap<String, Object> param) {
-        System.out.println("insertMemberJoyR");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberJoyRService.insertMemberJoyR(param));
-        System.out.println(result);
         return result;
     }
 
     @PutMapping("/updateMemberJoyR")
     public HashMap<String, Object> updateMemberJoyR(@RequestParam HashMap<String, Object> param) {
-        System.out.println("updateMemberJoyR");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberJoyRService.updateMemberJoyR(param));
         return result;
@@ -40,7 +37,6 @@ public class MemberJoyRController {
 
     @DeleteMapping("/deleteMemberJoyR")
     public HashMap<String, Object> deleteMemberJoyR(@RequestParam HashMap<String, Object> param) {
-        System.out.println("deleteMemberJoyR");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberJoyRService.deleteMemberJoyR(param));
         return result;

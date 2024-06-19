@@ -11,6 +11,6 @@ public interface MemberService {
     public int insertMember(HashMap<String, Object> param);
     public int updateMember(HashMap<String, Object> param);
     public int deleteMember(HashMap<String, Object> param);
-
+    public int countMemberId(HashMap<String, Object> param);
 
 }

@@ -18,6 +18,8 @@ public class Board {
     private String modified_date;
     private char del_yn;
     private int member_id;
+    private int joy_id;
+    private String joy_name;
     private String user_id;
     private String name;
 
