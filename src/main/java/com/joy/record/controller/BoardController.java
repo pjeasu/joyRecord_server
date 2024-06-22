@@ -29,9 +29,7 @@ public class BoardController {
 
     @PostMapping("/insertBoard")
     public HashMap<String, Object> insertBoard(@RequestParam HashMap<String, Object> param) {
-        HashMap<String, Object> result = new HashMap<String, Object>();
-        result.put("result", boardService.insertBoard(param));
-        return result;
+        return boardService.insertBoard(param);
     }
     @PutMapping("/updateBoard")
     public HashMap<String, Object> updateBoard(@RequestBody HashMap<String, Object> param) {

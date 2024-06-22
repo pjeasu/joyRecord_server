@@ -1,6 +1,7 @@
 package com.joy.record.service.impl;
 
 import com.joy.record.mapper.AttachFileMapper;
+import com.joy.record.mapper.BoardFileRMapper;
 import com.joy.record.model.AttachFile;
 import com.joy.record.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -21,13 +24,17 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private AttachFileMapper attachFileMapper;
 
+    @Autowired
+    private BoardFileRMapper boardFileRMapper;
+
+    private final Path rootLocation = Paths.get("uploads");
     /**
      * 여러 파일을 업로드하고 메타데이터를 데이터베이스에 저장
      *
      * @param files array of files to be uploaded
      * @return list of uploaded file metadata
      */
-    public List<AttachFile> uploadFiles(MultipartFile[] files) {
+    public List<AttachFile> uploadFiles(MultipartFile[] files, String param) {
         List<AttachFile> uploadedFiles = new ArrayList<>();
 
         try {
@@ -38,13 +45,24 @@ public class FileServiceImpl implements FileService {
                     throw new IllegalArgumentException("이미지 파일만 업로드할 수 있습니다.");
                 }
 
-
                 AttachFile attachFile = new AttachFile();
-                String fileName = file.getOriginalFilename();
-                Path filePath = Paths.get(uploadDir, fileName);
+                String originalFileName = file.getOriginalFilename();
+                String fileName = originalFileName;
+                Path filePath = rootLocation.resolve(fileName);
 
                 // 디렉토리가 존재하는지 확인하고 없으면 생성
-                Files.createDirectories(filePath.getParent());
+                Files.createDirectories(rootLocation);
+
+                // 중복되는 파일 이름 처리
+                int counter = 1;
+                while (Files.exists(filePath)) {
+                    String fileExtension = getFileExtension(originalFileName);
+                    String baseName = originalFileName.substring(0, originalFileName.length() - fileExtension.length());
+                    fileName = baseName + "(" + counter + ")" + fileExtension;
+                    filePath = rootLocation.resolve(fileName);
+                    counter++;
+                }
+
                 // 파일을 대상 위치에 복사
                 Files.copy(file.getInputStream(), filePath);
 
@@ -56,9 +74,16 @@ public class FileServiceImpl implements FileService {
                 // 파일 메타데이터를 데이터베이스에 삽입
                 attachFileMapper.insertAttachFile(attachFile);
 
+                // 위에서 insert 된 첨부 파일 아이디와 등록된 게시글 아이디를 릴레이션 테이블에 insert
+                HashMap<String, Object> relParam = new HashMap<String, Object>();
+                relParam.put("board_id", param);
+                relParam.put("file_id", attachFile.getFile_id());
+                boardFileRMapper.insertBoardFileR(relParam);
+
                 // 결과 리스트에 파일 메타데이터를 추가
                 uploadedFiles.add(attachFile);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,5 +114,11 @@ public class FileServiceImpl implements FileService {
                         contentType.equals("image/png") ||
                         contentType.equals("image/gif")
         );
+    }
+
+    /**  파일 확장자 추출 */
+    private String getFileExtension(String fileName) {
+        int lastIndex = fileName.lastIndexOf('.');
+        return (lastIndex == -1) ? "" : fileName.substring(lastIndex);
     }
 }

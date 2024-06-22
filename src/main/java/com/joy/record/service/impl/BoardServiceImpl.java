@@ -27,9 +27,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int insertBoard(HashMap<String, Object> param) {
-        System.out.println(param);
-        return boardMapper.insertBoard(param);
+    public HashMap<String, Object> insertBoard(HashMap<String, Object> param) {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("success", boardMapper.insertBoard(param));
+        result.put("board_id", param.get("board_id")); // 게시글 파일 첨부를 위해 board_id 프론트로 보내기
+        return result;
     }
     @Override
     public int updateBoard(HashMap<String, Object> param) {

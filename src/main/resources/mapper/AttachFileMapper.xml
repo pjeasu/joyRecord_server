@@ -19,6 +19,9 @@
             , #{file_type}
             , #{file_path}
         )
+        <selectKey keyProperty="file_id" resultType="Integer" order="AFTER">
+            SELECT current_value FROM sys.sequences WHERE name ='file_seq'
+        </selectKey>
     </insert>
 
     <select id="selectAttachFileById" resultType="AttachFile">
