@@ -5,12 +5,12 @@
 <mapper namespace="com.joy.record.mapper.BoardMapper">
 
     <!-- 게시글 목록 조회 -->
-    <select id="selectBoardList" parameterType="HashMap" resultType="Board">
+    <select id="selectBoardList" parameterType="HashMap" resultType="Board"  >
         SELECT
          BOARD_ID
         , TITLE
         , BOARD_TEXT
-        , JOY_DATE
+        , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
         , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
         , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
         , B.DEL_YN
@@ -32,11 +32,11 @@
 
     <!-- 게시글 단일 조회 -->
     <select id="selectBoardOne" parameterType="HashMap" resultType="Board">
-        SELECT
-        BOARD_ID
+        SELECT TOP 1
+        B.BOARD_ID
         , TITLE
         , BOARD_TEXT
-        , JOY_DATE
+        , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
         , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
         , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
         , B.DEL_YN
@@ -44,18 +44,21 @@
         , M.USER_ID
         , J.JOY_ID
         , J.JOY_NAME
+        , R.FILE_ID
         FROM BOARD B
         LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID
         LEFT OUTER JOIN JOY J
         ON B.JOY_ID = J.JOY_ID
+        LEFT OUTER JOIN BOARD_FILE_R R
+        ON B.BOARD_ID = R.BOARD_ID
         <where>
-            BOARD_ID = #{board_id}
+            B.BOARD_ID = #{board_id}
         </where>
     </select>
 
     <!-- 게시글 등록 -->
-    <insert id="insertBoard" parameterType="HashMap">
+    <insert id="insertBoard" parameterType="HashMap" >
         INSERT INTO BOARD
         (BOARD_ID
         , TITLE
@@ -87,6 +90,11 @@
             , #{file_id}
         </if>
         )
+
+        <selectKey keyProperty="board_id" resultType="Integer" order="AFTER">
+            SELECT current_value FROM sys.sequences WHERE name ='board_seq'
+        </selectKey>
+
     </insert>
 
     <!-- 게시글 수정 -->

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joy.record.mapper.BoardFileRMapper">
+
+
+    <!-- 게시글-파일 R 등록 -->
+    <insert id="insertBoardFileR" parameterType="HashMap">
+        INSERT INTO BOARD_FILE_R
+        (
+            BOARD_ID
+            , FILE_ID
+        )
+        VALUES
+        (
+            #{board_id}
+            , #{file_id}
+        )
+    </insert>
+
+
+    <!-- 게시글 첨부파일 조회 -->
+    <select id="selectBoardFile" parameterType="HashMap" resultType="BoardFileR">
+        SELECT
+            B.BOARD_ID,
+            A.FILE_ID,
+            A.FILE_NAME,
+            A.FILE_PATH
+            FROM BOARD B
+        LEFT OUTER JOIN BOARD_FILE_R R
+        ON B.BOARD_ID = R.BOARD_ID
+        LEFT OUTER JOIN ATTACH_FILE A
+        ON R.FILE_ID = A.FILE_ID
+        <where>
+            B.BOARD_ID = #{board_id}
+        </where>
+    </select>
+
+</mapper>
