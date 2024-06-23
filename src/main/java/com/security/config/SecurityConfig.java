@@ -47,14 +47,6 @@ public class SecurityConfig  {
         //JwtAuthFilter를 UsernamePasswordAuthenticationFilter 앞에 추가
         http.addFilterBefore(new JwtAuthFilter(customUserDetailsService, jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
-
-        System.out.println("filterChain");
-        System.out.println(http);
-//        http.exceptionHandling((exceptionHandling) -> exceptionHandling
-//                .authenticationEntryPoint(authenticationEntryPoint)
-//                .accessDeniedHandler(accessDeniedHandler)
-//        );
-
         // 권한 규칙 작성
         http
                 .csrf(csrf -> csrf.disable())

@@ -36,16 +36,13 @@ public class MemberController {
 
     @PostMapping("/insertMember")
     public HashMap<String, Object> insertMember(@RequestParam HashMap<String, Object> param) {
-        System.out.println("insertMember");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.insertMember(param));
-        System.out.println(result);
         return result;
     }
 
     @PutMapping("/updateMember")
     public HashMap<String, Object> updateMember(@RequestParam HashMap<String, Object> param) {
-        System.out.println("updateMember");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.updateMember(param));
         return result;
@@ -53,7 +50,6 @@ public class MemberController {
 
     @PutMapping("/deleteMember")
     public HashMap<String, Object> deleteMember(@RequestParam HashMap<String, Object> param) {
-        System.out.println("deleteMember");
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.deleteMember(param));
         return result;

@@ -24,4 +24,6 @@ public class Board {
     private String user_id;
     private String name;
 
+    private int file_id;
+
 }

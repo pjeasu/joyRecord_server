@@ -49,10 +49,6 @@ public class JwtUtil {
      * @return JWT String
      */
     private String createToken(Member member, long expireTime) {
-        System.out.println("createToken");
-        System.out.println(member);
-
-
         Claims claims = Jwts.claims();
         claims.put("memberId", member.getMember_id());
         claims.put("email", member.getEmail());
@@ -77,9 +73,6 @@ public class JwtUtil {
      * @return User ID
      */
     public Long getUserId(String token) {
-        System.out.println("getUserId");
-        System.out.println(token);
-
         return parseClaims(token).get("memberId", Long.class);
     }
 
@@ -90,11 +83,6 @@ public class JwtUtil {
      * @return IsValidate
      */
     public boolean validateToken(String token) {
-
-        System.out.println("validateToken");
-        System.out.println(token);
-
-
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;

@@ -34,7 +34,6 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public HashMap<String, Object> login(LoginRequestDto dto) {
         
-        System.out.println("AuthServiceImpl - login");
         String userid = dto.getUser_id();
         String password = dto.getPassword();
 
@@ -47,12 +46,7 @@ public class AuthServiceImpl implements AuthService {
         if(!encoder.matches(password, member.getPassword())) {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
-
         Member info = modelMapper.map(member, Member.class);
-
-        System.out.println("info");
-        System.out.println(info);
-
         String accessToken = jwtUtil.createAccessToken(info);
 
         HashMap<String, Object> memData = new HashMap<>();
@@ -60,8 +54,6 @@ public class AuthServiceImpl implements AuthService {
         memData.put("user_id" , info.getUser_id());
         memData.put("member_id" , info.getMember_id());
         memData.put("user_role" , info.getRole());
-
-
         return memData;
     }
 }
