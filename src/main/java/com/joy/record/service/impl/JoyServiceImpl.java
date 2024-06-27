@@ -30,12 +30,4 @@ public class JoyServiceImpl implements JoyService {
         return joyMapper.updateJoy(param);
     }
 
-    @Override
-    public int deleteJoy(HashMap<String, Object> param) {
-        return joyMapper.deleteJoy(param);
-    }
-
-
-
-
 }

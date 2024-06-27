@@ -53,10 +53,9 @@ public class SecurityConfig  {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/board/**").hasRole("MEM")
-                        .requestMatchers("/joy/**").hasRole("MEM")
-//                        .requestMatchers("/board").hasRole("MEM")
-//                        .requestMatchers("/admin").hasRole("ADM")
+                        .requestMatchers("/board/**").hasAnyRole("MEM", "ADM")
+                        .requestMatchers("/joy/**").hasAnyRole("MEM", "ADM")
+                        .requestMatchers("/admin").hasRole("ADM")
                         .anyRequest().authenticated()
                 );
 

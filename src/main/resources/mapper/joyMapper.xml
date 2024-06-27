@@ -47,16 +47,12 @@
             <if test='detail != null and detail != ""'>
                 DETAIL = #{detail},
             </if>
+            <if test='del_yn != null and del_yn != ""'>
+                DEL_YN = #{del_yn},
+            </if>
         </set>
         WHERE JOY_ID = #{joy_id}
     </update>
 
-    <!-- 취미 삭제 (DEL_YN : Y 수정) -->
-    <update id="deleteJoy" parameterType="HashMap" >
-        UPDATE JOY
-        <set>
-            DEL_YN = 'Y'
-        </set>
-        WHERE JOY_ID = #{joy_id}
-    </update>
+
 </mapper>

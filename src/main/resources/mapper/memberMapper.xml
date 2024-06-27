@@ -8,6 +8,7 @@
     <select id="selectMemberList" parameterType="HashMap" resultType="Member">
         SELECT
          USER_ID
+        , MEMBER_ID
         , PASSWORD
         , USER_NAME
         , BIRTH

@@ -10,7 +10,5 @@ public interface JoyService {
     public List<Joy> selectJoyList(HashMap<String, Object> param);
     public int insertJoy(HashMap<String, Object> param);
     public int updateJoy(HashMap<String, Object> param);
-    public int deleteJoy(HashMap<String, Object> param);
-
 
 }

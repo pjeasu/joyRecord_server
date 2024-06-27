@@ -29,16 +29,10 @@ public class JoyController {
     }
 
     @PutMapping("/updateJoy")
-    public HashMap<String, Object> updateJoy(@RequestParam HashMap<String, Object> param) {
+    public HashMap<String, Object> updateJoy(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", joyService.updateJoy(param));
         return result;
     }
 
-    @PutMapping("/deleteJoy")
-    public HashMap<String, Object> deleteJoy(@RequestParam HashMap<String, Object> param) {
-        HashMap<String, Object> result = new HashMap<String, Object>();
-        result.put("result", joyService.deleteJoy(param));
-        return result;
-    }
 }

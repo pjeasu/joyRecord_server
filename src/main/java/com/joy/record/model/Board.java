@@ -16,6 +16,7 @@ public class Board {
     private String created_date;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private String modified_date;
+    private char pub_yn;
     private char del_yn;
     private int member_id;
 

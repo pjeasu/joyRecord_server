@@ -42,14 +42,14 @@ public class MemberController {
     }
 
     @PutMapping("/updateMember")
-    public HashMap<String, Object> updateMember(@RequestParam HashMap<String, Object> param) {
+    public HashMap<String, Object> updateMember(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.updateMember(param));
         return result;
     }
 
     @PutMapping("/deleteMember")
-    public HashMap<String, Object> deleteMember(@RequestParam HashMap<String, Object> param) {
+    public HashMap<String, Object> deleteMember(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.deleteMember(param));
         return result;

@@ -13,6 +13,7 @@
         , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
         , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
         , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , B.PUB_YN
         , B.DEL_YN
         , B.MEMBER_ID
         , M.USER_ID
@@ -39,6 +40,7 @@
         , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
         , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
         , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , B.PUB_YN
         , B.DEL_YN
         , B.MEMBER_ID
         , M.USER_ID
@@ -67,6 +69,7 @@
         , CREATED_DATE
         , DEL_YN
         , MEMBER_ID
+        , PUB_YN
         <if test='joy_id != null and joy_id != ""'>
            , JOY_ID
         </if>
@@ -83,6 +86,7 @@
         , GETDATE()
         , 'N'
         , #{member_id}
+        , #{pub_yn}
         <if test='joy_id != null and joy_id != ""'>
             , #{joy_id}
         </if>
@@ -112,6 +116,9 @@
             </if>
             <if test='joy_id != null and joy_id != ""'>
                 JOY_ID = #{joy_id},
+            </if>
+            <if test='pub_yn != null and pub_yn != ""'>
+                PUB_YN = #{pub_yn},
             </if>
             MODIFIED_DATE = GETDATE()
         </set>
