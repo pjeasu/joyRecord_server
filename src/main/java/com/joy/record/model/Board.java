@@ -23,6 +23,7 @@ public class Board {
     private int joy_id;
     private String joy_name;
     private String user_id;
+    private String color;
     private String name;
 
     private int file_id;

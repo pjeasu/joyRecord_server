@@ -30,6 +30,14 @@ public class MemberJoyRServiceImpl implements MemberJoyRService {
     public int updateMemberJoyR(HashMap<String, Object> param) {
         return memberJoyRMapper.updateMemberJoyR(param);
     }
+    @Override
+    public int upsertMemberJoyR(List<HashMap<String, Object>> param) {
+        int resultNum = 0;
+        for (HashMap<String, Object> joyMap : param) {
+            resultNum += memberJoyRMapper.upsertMemberJoyR(joyMap);
+        }
+        return resultNum;
+    }
 
     @Override
     public int deleteMemberJoyR(HashMap<String, Object> param) {

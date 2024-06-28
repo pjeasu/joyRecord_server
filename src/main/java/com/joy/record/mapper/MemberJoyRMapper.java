@@ -12,6 +12,7 @@ public interface MemberJoyRMapper {
     List<Joy> selectMemberJoyRList(HashMap<String, Object> param);
     int insertMemberJoyR(HashMap<String, Object> param);
     int updateMemberJoyR(HashMap<String, Object> param);
+    int upsertMemberJoyR(HashMap<String, Object> param);
     int deleteMemberJoyR(HashMap<String, Object> param);
 
 }

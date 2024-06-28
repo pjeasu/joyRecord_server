@@ -11,7 +11,7 @@
         , JOY_NAME
         , DETAIL
         , DEL_YN
-        FROM JOY
+        FROM JOY J
         <where>
             <if test='del_yn != null and  del_yn != ""'>
                 AND DEL_YN = #{del_yn}

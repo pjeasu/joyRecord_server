@@ -11,5 +11,8 @@ public class Joy {
     private String joy_name;
     private String detail;
     private String del_yn;
+
     private int member_id;
+    private String color;
+
 }
