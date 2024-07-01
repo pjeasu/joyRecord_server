@@ -12,7 +12,7 @@ COPY settings.gradle /app/
 # Copy the source code
 COPY src /app/src
 
-COPY build/libs/*.jar app.jar
+COPY build/libs/record-0.0.1-SNAPSHOT.jar app.jar
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
