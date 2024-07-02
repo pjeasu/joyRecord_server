@@ -4,11 +4,6 @@ FROM openjdk:17-jdk-alpine
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Gradle wrapper and build files
-COPY gradlew* /app/
-COPY build.gradle /app/
-COPY settings.gradle /app/
-
 # Copy the source code
 COPY src /app/src
 
