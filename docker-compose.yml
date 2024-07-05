@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: recordserver-app # 스프링 부트 애플리케이션의 Docker 이미지
+    image: joyrecord-server # 스프링 부트 애플리케이션의 Docker 이미지
     ports:
       - "8080:8080"
     environment:
