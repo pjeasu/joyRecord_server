@@ -11,4 +11,4 @@ COPY build/libs/record-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # 애플리케이션 실행 명령어
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-Dserver.port=${PORT:-8080}", "-jar", "app.jar"]
