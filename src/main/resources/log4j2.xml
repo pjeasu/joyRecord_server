@@ -13,17 +13,13 @@
             <PatternLayout pattern="${LOG_PATTERN}" />
         </Console>
 
-        <!-- 파일에 로그 출력 설정 -->
-        <File name="File" fileName="${LOG_FILE}">
-            <PatternLayout pattern="${LOG_PATTERN}" />
-        </File>
-
         <!-- 일별 로그 파일 롤링 설정 -->
         <RollingFile name="RollingFile" fileName="${LOG_FILE}"
                      filePattern="logs/app-%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
                 <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB" />
             </Policies>
         </RollingFile>
     </Appenders>
@@ -41,12 +37,10 @@
             <AppenderRef ref="RollingFile" />
         </Logger>
 
-
         <!-- MyBatis 로그 설정 -->
         <Logger name="org.apache.ibatis" level="DEBUG" additivity="false">
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingFile" />
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </Logger>
 
         <Logger name="org.mybatis" level="DEBUG" additivity="false">
