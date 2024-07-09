@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
   app:
-    image: joyrecord-server # 스프링 부트 애플리케이션의 Docker 이미지
+    image: joy-record-server # 스프링 부트 애플리케이션의 Docker 이미지
     ports:
-      - "8080:8080"
+      - "10000:10000"
     environment:
       SPRING_DATASOURCE_URL: jdbc:sqlserver://db:1433;databaseName=example_db
       SPRING_DATASOURCE_USERNAME: joy_dev

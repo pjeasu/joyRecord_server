@@ -8,7 +8,7 @@ WORKDIR /app
 COPY build/libs/record-0.0.1-SNAPSHOT.jar app.jar
 
 # 컨테이너가 노출할 포트 설정
-EXPOSE ${PORT:-8080}
+EXPOSE ${PORT:-10000}
 
 
 # 애플리케이션 실행 명령어
