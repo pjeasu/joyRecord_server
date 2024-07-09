@@ -19,7 +19,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 0000
-      MYSQL_DATABASE: joy_dev
+      MYSQL_DATABASE: joyrecord_db
       MYSQL_USER: joy_dev
       MYSQL_PASSWORD: joyrecord1009
     volumes:
