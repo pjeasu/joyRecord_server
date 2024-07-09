@@ -10,9 +10,9 @@
          BOARD_ID
         , TITLE
         , BOARD_TEXT
-        , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
-        , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
-        , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , DATE_FORMAT(JOY_DATE, '%Y-%m-%d') AS JOY_DATE
+        , DATE_FORMAT(CREATED_DATE, '%Y-%m-%d %T') AS CREATED_DATE
+        , DATE_FORMAT(MODIFIED_DATE, '%Y-%m-%d %T') AS MODIFIED_DATE
         , B.PUB_YN
         , B.DEL_YN
         , B.MEMBER_ID
@@ -40,20 +40,20 @@
 
     <!-- 게시글 단일 조회 -->
     <select id="selectBoardOne" parameterType="HashMap" resultType="Board">
-        SELECT TOP 1
+        SELECT
         B.BOARD_ID
         , TITLE
         , BOARD_TEXT
-        , CONVERT(CHAR(10), JOY_DATE, 23) AS JOY_DATE
-        , CONVERT(CHAR(19), CREATED_DATE, 20) AS CREATED_DATE
-        , CONVERT(CHAR(19), MODIFIED_DATE, 20) AS MODIFIED_DATE
+        , DATE_FORMAT(JOY_DATE, '%Y-%m-%d') AS JOY_DATE
+        , DATE_FORMAT(CREATED_DATE, '%Y-%m-%d %T') AS CREATED_DATE
+        , DATE_FORMAT(MODIFIED_DATE, '%Y-%m-%d %T') AS MODIFIED_DATE
         , B.PUB_YN
         , B.DEL_YN
         , B.MEMBER_ID
         , M.USER_ID
         , J.JOY_ID
         , J.JOY_NAME
-        , ISNULL(R.FILE_ID, 0) AS FILE_ID
+        , IFNULL(R.FILE_ID, 0) AS FILE_ID
         FROM BOARD B
         LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID
@@ -64,6 +64,7 @@
         <where>
             B.BOARD_ID = #{board_id}
         </where>
+        LIMIT 1
     </select>
 
     <!-- 게시글 등록 -->
