@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://39.120.114.96:3306/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://39.120.114.96:3307/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true
       SPRING_DATASOURCE_USERNAME: joy_dev
       SPRING_DATASOURCE_PASSWORD: joyrecord1009
 
