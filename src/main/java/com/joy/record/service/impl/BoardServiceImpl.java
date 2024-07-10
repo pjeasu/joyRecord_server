@@ -3,8 +3,11 @@ package com.joy.record.service.impl;
 import com.joy.record.mapper.BoardMapper;
 import com.joy.record.model.Board;
 import com.joy.record.service.BoardService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +18,15 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     BoardMapper boardMapper;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Override
+    @Transactional
     public List<Board> selectBoardList(HashMap<String, Object> param) {
+        logger.info("=======================selectBoardList");
+        logger.info(String.valueOf(param));
+
         return boardMapper.selectBoardList(param);
     }
 
