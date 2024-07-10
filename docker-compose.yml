@@ -2,16 +2,17 @@ version: '3.8'
 
 services:
   app:
-    image: joy-record-server
+    image: jisusu/joy-record-server:latest
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.0.22:3307/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true
-      SPRING_DATASOURCE_USERNAME: joy_dev
-      SPRING_DATASOURCE_PASSWORD: joyrecord1009
+      - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.0.22:3307/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=joy_dev
+      - SPRING_DATASOURCE_PASSWORD=joyrecord1009
 
     depends_on:
-      - db
+       db:
+          condition: service_healthy
 
   db:
     image: mysql:latest
@@ -27,5 +28,10 @@ services:
       - "mysqld"
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 volumes:
   mysql_data:
