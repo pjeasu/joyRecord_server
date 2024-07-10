@@ -16,7 +16,7 @@ services:
   db:
     image: mysql:latest
     ports:
-      - "3307:3306"
+      - "3307:3307"
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: 0000
