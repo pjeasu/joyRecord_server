@@ -10,7 +10,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /c/mysql-data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
 
   spring-boot-app:
     build: .
