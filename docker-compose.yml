@@ -1,32 +1,28 @@
-
 services:
-  db:
-    image: mysql:latest
-    ports:
-      - "3307:3306"
+  mysql:
+    image:  mysql:latest
+    container_name: mysql
     environment:
-      MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: 0000
       MYSQL_DATABASE: joyRecord_DB
       MYSQL_USER: joy_dev
       MYSQL_PASSWORD: joyrecord1009
-    command:
-      - "mysqld"
-      - "--character-set-server=utf8mb4"
-      - "--collation-server=utf8mb4_unicode_ci"
-
+    ports:
+      - "3306:3306"
     volumes:
       - /c/mysql-data:/var/lib/mysql
 
-  app:
-    image: joy-server
+  spring-boot-app:
+    build: .
+    container_name: spring-boot-app
     ports:
       - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://0.0.0.0:3307/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true&useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=joy_dev
-      - SPRING_DATASOURCE_PASSWORD=joyrecord1009
-
     depends_on:
-     - db
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB
+      SPRING_DATASOURCE_USERNAME: joy_dev
+      SPRING_DATASOURCE_PASSWORD: joyrecord1009
 
+volumes:
+  mysql-data:
