@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/conf.d:/etc/mysql/conf.d
+      - mysql-data:/var/lib/mysql
     command:
       - "mysqld"
       - "--character-set-server=utf8mb4"
@@ -27,3 +27,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/joyRecord_DB
       SPRING_DATASOURCE_USERNAME: joy_dev
       SPRING_DATASOURCE_PASSWORD: joyrecord1009
+
+volumes:
+  mysql-data:
