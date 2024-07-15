@@ -32,5 +32,8 @@ services:
       SPRING_DATASOURCE_USERNAME: joy_dev
       SPRING_DATASOURCE_PASSWORD: joyrecord1009
 
+volumes:
+  mysql-data:
+
 networks:
   joyrecord_server_default:
