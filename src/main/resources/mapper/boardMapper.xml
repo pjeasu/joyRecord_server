@@ -20,10 +20,10 @@
         , J.JOY_ID
         , J.JOY_NAME
         , R.COLOR
-        FROM board B
-        LEFT OUTER JOIN member M
+        FROM BOARD B
+        LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID
-        LEFT OUTER JOIN joy J
+        LEFT OUTER JOIN JOY J
         ON B.JOY_ID = J.JOY_ID
         LEFT OUTER JOIN MEMBER_JOY_R R
         ON R.JOY_ID = J.JOY_ID
