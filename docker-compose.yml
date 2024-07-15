@@ -9,6 +9,8 @@ services:
       MYSQL_PASSWORD: joyrecord1009
     ports:
       - "3306:3306"
+    networks:
+      - joyrecord_server_default
     volumes:
       - mysql-data:/var/lib/mysql
     command:
@@ -19,6 +21,8 @@ services:
   spring-boot-app:
     build: .
     container_name: spring-boot-app
+    networks:
+      - joyrecord_server_default
     ports:
       - "8080:8080"
     depends_on:
@@ -28,5 +32,5 @@ services:
       SPRING_DATASOURCE_USERNAME: joy_dev
       SPRING_DATASOURCE_PASSWORD: joyrecord1009
 
-volumes:
-  mysql-data:
+networks:
+  joyrecord_server_default:
