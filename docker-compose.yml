@@ -24,7 +24,7 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: joy_dev
       SPRING_DATASOURCE_PASSWORD: joyrecord1009
 
