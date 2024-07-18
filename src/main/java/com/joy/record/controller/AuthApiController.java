@@ -18,12 +18,12 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthApiController {
 
     private final AuthService authService;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<String> getMemberProfile(
             @Valid @RequestBody LoginRequestDto request
     ) throws JsonProcessingException {

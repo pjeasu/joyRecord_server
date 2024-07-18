@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/boardFileR")
+@RequestMapping("/api/boardFileR")
 public class BoardFileRController {
 
     @Autowired

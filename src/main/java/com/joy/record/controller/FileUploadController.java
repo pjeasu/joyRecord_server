@@ -21,7 +21,7 @@ import org.apache.commons.io.IOUtils;
 
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/api/files")
 public class FileUploadController {
 
     @Autowired

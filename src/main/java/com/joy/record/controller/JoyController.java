@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/joy")
+@RequestMapping("/api/joy")
 public class JoyController {
 
     @Autowired

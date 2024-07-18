@@ -27,7 +27,7 @@ public class SecurityConfig  {
 
 
     private static final String[] AUTH_WHITELIST = {
-             "board/selectBoardList","member/join", "files/**", "/api-docs", "auth/**",  "api-docs/**"
+             "/api/board/selectBoardList","/api/member/join", "/files/**", "/api-docs", "/api/auth/login", "/api-docs/**"
     };
 
     @Bean
@@ -53,9 +53,8 @@ public class SecurityConfig  {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/board/**").hasAnyRole("MEM", "ADM")
-                        .requestMatchers("/joy/**").hasAnyRole("MEM", "ADM")
-                        .requestMatchers("/admin").hasRole("ADM")
+                        .requestMatchers("/api/**").hasAnyRole("MEM", "ADM")
+                        .requestMatchers("/api/admin/**").hasRole("ADM")
                         .anyRequest().authenticated()
                 );
 
