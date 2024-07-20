@@ -87,11 +87,11 @@
         )
         VALUES
         (
-        NEXT VALUE FOR [dbo].[board_seq]
+         (SELECT NEXTVAL('BOARD_ID') AS BOARD_ID from DUAL)
         , #{title}
         , #{board_text}
         , #{joy_date}
-        , GETDATE()
+        , NOW()
         , 'N'
         , #{member_id}
         , #{pub_yn}
@@ -104,7 +104,7 @@
         )
 
         <selectKey keyProperty="board_id" resultType="Integer" order="AFTER">
-            SELECT current_value FROM sys.sequences WHERE name ='board_seq'
+            SELECT CURRVAL FROM SEQUENCES WHERE NAME = 'BOARD_ID'
         </selectKey>
 
     </insert>

@@ -56,13 +56,17 @@
 
     <!-- 회원 취미 수정 VER2 -->
     <update id="upsertMemberJoyR" parameterType="HashMap" >
-        MERGE INTO MEMBER_JOY_R AS R
-        USING (SELECT 1 AS dual) AS D
-        ON (R.MEMBER_ID = #{member_id} AND R.JOY_ID = #{joy_id})
-        WHEN MATCHED THEN
-        UPDATE SET R.COLOR = #{color}
-        WHEN NOT MATCHED THEN
-        INSERT(MEMBER_ID, JOY_ID, COLOR) VALUES(#{member_id}, #{joy_id}, #{color});
+        INSERT INTO MEMBER_JOY_R(
+        MEMBER_ID,
+        JOY_ID,
+        COLOR
+        )VALUES(
+        #{member_id},
+        #{joy_id},
+        #{color}
+        )
+        ON DUPLICATE KEY UPDATE
+        COLOR = #{color}
     </update>
 
     <!-- 회원 취미 삭제  -->

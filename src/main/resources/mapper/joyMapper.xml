@@ -30,7 +30,7 @@
         )
         VALUES
         (
-        NEXT VALUE FOR [dbo].[joy_seq]
+        (SELECT NEXTVAL('JOY_ID') AS JOY_ID from DUAL)
         , #{joy_name}
         , #{detail}
         , 'N'
