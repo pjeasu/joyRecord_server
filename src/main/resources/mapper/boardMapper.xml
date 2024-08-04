@@ -128,7 +128,8 @@
             <if test='pub_yn != null and pub_yn != ""'>
                 PUB_YN = #{pub_yn},
             </if>
-            MODIFIED_DATE = GETDATE()
+            MODIFIED_DATE = NOW()
+
         </set>
         WHERE BOARD_ID = #{board_id}
     </update>
@@ -138,7 +139,7 @@
         UPDATE BOARD
         <set>
             DEL_YN = 'Y',
-            MODIFIED_DATE = GETDATE()
+            MODIFIED_DATE = NOW()
         </set>
         WHERE BOARD_ID = #{board_id}
     </update>

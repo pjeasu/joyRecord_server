@@ -56,4 +56,19 @@ public class AuthServiceImpl implements AuthService {
         memData.put("user_role" , info.getRole());
         return memData;
     }
+
+    @Override
+    public boolean checkPassword(LoginRequestDto dto) {
+        boolean check = true;
+        String userid = dto.getUser_id();
+        String password = dto.getPassword();
+        Member member = memberMapper.findByUsername(userid);
+
+        // 암호화된 password를 디코딩한 값과 입력한 패스워드 값이 다르면 false 반환
+        if(!encoder.matches(password, member.getPassword())) {
+            check = false;
+        }
+
+        return check;
+    }
 }

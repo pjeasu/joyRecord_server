@@ -44,7 +44,18 @@ public class MemberController {
     @PutMapping("/updateMember")
     public HashMap<String, Object> updateMember(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
+
+        if(param.get("changePW").toString().equals("true")){
+            String rawPw = ""; //사용자가 입력한 값
+            String encodePw = ""; // 암호화된 값
+            rawPw = String.valueOf(param.get("new_password"));
+            encodePw = pwEncoder.encode(rawPw);
+            param.put("password",encodePw);
+        }
+
+        System.out.println(param);
         result.put("result", memberService.updateMember(param));
+
         return result;
     }
 

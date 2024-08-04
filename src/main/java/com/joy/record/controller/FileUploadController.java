@@ -27,7 +27,7 @@ public class FileUploadController {
     @Autowired
     private FileService fileService;
 
-    private static final String UPLOAD_FOLDER = "C:/workspace/recordServer/uploads/"; // 실제 업로드 폴더 경로
+    private static final String UPLOAD_FOLDER = "/mnt/newvolume/uploads"; // 실제 업로드 폴더 경로
 
 
     /**

@@ -7,4 +7,5 @@ import java.util.Objects;
 
 public interface AuthService {
     public HashMap<String, Object> login(LoginRequestDto dto) ;
+    public boolean checkPassword(LoginRequestDto dto) ;
 }

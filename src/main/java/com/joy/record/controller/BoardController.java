@@ -40,7 +40,7 @@ public class BoardController {
 
 
     @PutMapping("/deleteBoard")
-    public HashMap<String, Object> deleteBoard(@RequestParam HashMap<String, Object> param) {
+    public HashMap<String, Object> deleteBoard(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", boardService.deleteBoard(param));
         return result;

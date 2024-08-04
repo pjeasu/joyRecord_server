@@ -35,4 +35,11 @@ public class AuthApiController {
 
         return ResponseEntity.status(HttpStatus.OK).body(JsonData);
     }
+
+    /** 회원정보 수정 시, 기존 비밀번호 체크 */
+    @PostMapping("/checkPassword")
+    public boolean checkPassword(@Valid @RequestBody LoginRequestDto request)  {
+        boolean check = this.authService.checkPassword(request);
+        return check;
+    }
 }
