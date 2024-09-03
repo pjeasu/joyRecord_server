@@ -5,12 +5,12 @@
 <mapper namespace="com.joy.record.mapper.AttachFileMapper">
 
     <insert id="insertAttachFile">
-        INSERT INTO attach_file
+        INSERT INTO ATTACH_FILE
         (
-            file_id
-            , file_name
-            , file_type
-            , file_path
+            FILE_ID
+            , FILE_NAME
+            , FILE_TYPE
+            , FILE_PATH
         )
         VALUES
         (
@@ -26,12 +26,12 @@
 
     <select id="selectAttachFileById" resultType="AttachFile">
         SELECT
-            file_id
-            , file_name
-            , file_type
-            , file_path
-        FROM attach_file
-        WHERE file_id = #{file_id}
+            FILE_ID
+            , FILE_NAME
+            , FILE_TYPE
+            , FILE_PATH
+        FROM ATTACH_FILE
+        WHERE FILE_ID = #{file_id}
     </select>
 
 </mapper>

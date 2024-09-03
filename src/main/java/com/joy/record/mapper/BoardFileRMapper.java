@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface BoardFileRMapper {
 
-    HashMap<String, Object> insertBoardFileR(HashMap<String, Object> param);
+   int insertBoardFileR(HashMap<String, Object> param);
     List<BoardFileR>  selectBoardFile(HashMap<String, Object> param);
 
 }

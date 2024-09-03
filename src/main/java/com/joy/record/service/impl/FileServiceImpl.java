@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 public class FileServiceImpl implements FileService {
 
-    private final String uploadDir = "uploads/";
 
     @Autowired
     private AttachFileMapper attachFileMapper;
@@ -75,6 +74,7 @@ public class FileServiceImpl implements FileService {
                 attachFileMapper.insertAttachFile(attachFile);
 
                 // 위에서 insert 된 첨부 파일 아이디와 등록된 게시글 아이디를 릴레이션 테이블에 insert
+                int chk = 0;
                 HashMap<String, Object> relParam = new HashMap<String, Object>();
                 relParam.put("board_id", param);
                 relParam.put("file_id", attachFile.getFile_id());
