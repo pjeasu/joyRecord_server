@@ -27,15 +27,25 @@
         ON B.JOY_ID = J.JOY_ID
         LEFT OUTER JOIN MEMBER_JOY_R R
         ON R.JOY_ID = J.JOY_ID
+
         <where>
             <if test='member_id != null and  member_id != ""'>
                 AND B.MEMBER_ID = #{member_id}
+            </if>
+            <if test='fromDate != null and fromDate !="" and toDate != null and toDate !=""' >
+                AND JOY_DATE BETWEEN #{fromDate} AND #{toDate}
+            </if>
+            <if test='joy_id != null and joy_id != ""'>
+                AND J.JOY_ID = #{joy_id}
+            </if>
+            <if test='searchText != null and  searchText != ""'>
+                AND (B.TITLE LIKE '%${searchText}%' OR B.BOARD_TEXT LIKE '%${searchText}%')
             </if>
             <if test='del_yn != null and  del_yn != ""'>
                 AND B.DEL_YN = #{del_yn}
             </if>
         </where>
-        ORDER BY BOARD_ID DESC
+        ORDER BY JOY_DATE DESC
     </select>
 
     <!-- 게시글 단일 조회 -->
@@ -87,7 +97,7 @@
         )
         VALUES
         (
-         (SELECT NEXTVAL('BOARD_ID') AS BOARD_ID from DUAL)
+         (SELECT nextval('BOARD_ID') AS BOARD_ID from DUAL)
         , #{title}
         , #{board_text}
         , #{joy_date}

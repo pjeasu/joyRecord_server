@@ -26,7 +26,7 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private BoardFileRMapper boardFileRMapper;
 
-    private final Path rootLocation = Paths.get("uploads");
+    private final Path rootLocation = Paths.get("/mnt/ebs/uploads");
     /**
      * 여러 파일을 업로드하고 메타데이터를 데이터베이스에 저장
      *
@@ -51,6 +51,14 @@ public class FileServiceImpl implements FileService {
 
                 // 디렉토리가 존재하는지 확인하고 없으면 생성
                 Files.createDirectories(rootLocation);
+
+
+                System.out.println("Directory created or already exists: " + rootLocation);
+
+                // 파일 복사 시 로그 추가
+                Files.copy(file.getInputStream(), filePath);
+                System.out.println("File saved at: " + filePath.toString());
+
 
                 // 중복되는 파일 이름 처리
                 int counter = 1;
