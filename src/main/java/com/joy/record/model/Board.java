@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class Board {
     private int board_id;
+    private int id;
     private String title;
     private String board_text;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

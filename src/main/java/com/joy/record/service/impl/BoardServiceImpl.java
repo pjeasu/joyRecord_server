@@ -31,6 +31,15 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
+    public List<Board> selectBoardCalList(HashMap<String, Object> param) {
+        logger.info("=======================selectBoardCalList");
+        logger.info(String.valueOf(param));
+
+        return boardMapper.selectBoardCalList(param);
+    }
+
+    @Override
     public Board selectBoardOne(HashMap<String, Object> param) {
         return boardMapper.selectBoardOne(param);
     }

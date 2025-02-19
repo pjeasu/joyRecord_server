@@ -4,10 +4,11 @@
 
 <mapper namespace="com.joy.record.mapper.BoardMapper">
 
-    <!-- 게시글 목록 조회 -->
+    <!-- 게시글 목록 조회 : 리스트 -->
     <select id="selectBoardList" parameterType="HashMap" resultType="Board"  >
         SELECT
-         BOARD_ID
+         row_number() over ( order by JOY_DATE, BOARD_ID ) AS ID
+        , BOARD_ID
         , TITLE
         , BOARD_TEXT
         , DATE_FORMAT(JOY_DATE, '%Y-%m-%d') AS JOY_DATE
@@ -19,15 +20,11 @@
         , M.USER_ID
         , J.JOY_ID
         , J.JOY_NAME
-        , R.COLOR
         FROM BOARD B
         LEFT OUTER JOIN MEMBER M
         ON B.MEMBER_ID = M.MEMBER_ID
         LEFT OUTER JOIN JOY J
         ON B.JOY_ID = J.JOY_ID
-        LEFT OUTER JOIN MEMBER_JOY_R R
-        ON R.JOY_ID = J.JOY_ID
-
         <where>
             <if test='member_id != null and  member_id != ""'>
                 AND B.MEMBER_ID = #{member_id}
@@ -47,6 +44,48 @@
         </where>
         ORDER BY JOY_DATE DESC
     </select>
+
+    <!-- 게시글 목록 조회 : 캘린더 -->
+    <select id="selectBoardCalList" parameterType="HashMap" resultType="Board"  >
+        SELECT
+         BOARD_ID
+        , TITLE
+        , BOARD_TEXT
+        , DATE_FORMAT(JOY_DATE, '%Y-%m-%d') AS JOY_DATE
+        , DATE_FORMAT(CREATED_DATE, '%Y-%m-%d %T') AS CREATED_DATE
+        , DATE_FORMAT(MODIFIED_DATE, '%Y-%m-%d %T') AS MODIFIED_DATE
+        , B.PUB_YN
+        , B.DEL_YN
+        , B.MEMBER_ID
+        , M.USER_ID
+        , J.JOY_ID
+        , J.JOY_NAME
+        , (SELECT COLOR FROM MEMBER_JOY_R R WHERE R.MEMBER_ID= #{member_id} AND R.JOY_ID = J.JOY_ID) AS COLOR
+        FROM BOARD B
+        LEFT OUTER JOIN MEMBER M
+        ON B.MEMBER_ID = M.MEMBER_ID
+        LEFT OUTER JOIN JOY J
+        ON B.JOY_ID = J.JOY_ID
+        <where>
+            <if test='member_id != null and  member_id != ""'>
+                AND B.MEMBER_ID = #{member_id}
+            </if>
+            <if test='fromDate != null and fromDate !="" and toDate != null and toDate !=""' >
+                AND JOY_DATE BETWEEN #{fromDate} AND #{toDate}
+            </if>
+            <if test='joy_id != null and joy_id != ""'>
+                AND J.JOY_ID = #{joy_id}
+            </if>
+            <if test='searchText != null and  searchText != ""'>
+                AND (B.TITLE LIKE '%${searchText}%' OR B.BOARD_TEXT LIKE '%${searchText}%')
+            </if>
+            <if test='del_yn != null and  del_yn != ""'>
+                AND B.DEL_YN = #{del_yn}
+            </if>
+        </where>
+        ORDER BY JOY_DATE DESC
+    </select>
+
 
     <!-- 게시글 단일 조회 -->
     <select id="selectBoardOne" parameterType="HashMap" resultType="Board">

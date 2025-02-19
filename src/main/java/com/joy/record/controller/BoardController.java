@@ -21,6 +21,10 @@ public class BoardController {
     public List<Board> selectBoardList(@RequestParam HashMap<String, Object> param) {
         return boardService.selectBoardList(param);
     }
+    @GetMapping("/selectBoardCalList")
+    public List<Board> selectBoardCalList(@RequestParam HashMap<String, Object> param) {
+        return boardService.selectBoardCalList(param);
+    }
 
     @GetMapping("/selectBoardOne")
     public Board selectBoardOne(@RequestParam HashMap<String, Object> param) {
