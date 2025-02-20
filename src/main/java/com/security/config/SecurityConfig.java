@@ -1,8 +1,8 @@
 package com.security.config;
 
-import com.security.Jwt.CustomUserDetailsService;
-import com.security.Jwt.JwtAuthFilter;
-import com.security.Jwt.JwtUtil;
+import com.joy.record.exception.CustomAccessDeniedHandler;
+import com.joy.record.exception.CustomAuthenticationEntryPoint;
+import com.security.Jwt.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -22,12 +22,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig  {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtUtil jwtUtil;
-//    private final CustomAccessDeniedHandler accessDeniedHandler;
-//    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+
 
 
     private static final String[] AUTH_WHITELIST = {
-             "/api/board/selectBoardList","/api/member/join", "/files/**", "/api-docs", "/api/auth/login", "/api-docs/**"
+            "/api/member/join", "/files/**", "/api-docs", "/api/auth/login", "/api-docs/**"
     };
 
     @Bean
@@ -47,14 +46,21 @@ public class SecurityConfig  {
         //JwtAuthFilter를 UsernamePasswordAuthenticationFilter 앞에 추가
         http.addFilterBefore(new JwtAuthFilter(customUserDetailsService, jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
+        // 401, 403에 대한 커스텀 응답 처리 추가
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()) // 401 Unauthorized
+                .accessDeniedHandler(new CustomAccessDeniedHandler()) // 403 Forbidden
+        );
+
+
         // 권한 규칙 작성
         http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/api/**").hasAnyRole("MEM", "ADM")
                         .requestMatchers("/api/admin/**").hasRole("ADM")
+                        .requestMatchers("/api/**").hasAnyRole("MEM", "ADM")
                         .anyRequest().authenticated()
                 );
 

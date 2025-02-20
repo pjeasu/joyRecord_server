@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/api")
 public class MemberController {
 
     @Autowired
@@ -24,24 +24,24 @@ public class MemberController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("/selectMemberList")
+    @GetMapping("/admin/selectMemberList")
     public List<Member> selectMemberList(@RequestParam HashMap<String, Object> param) {
         return memberService.selectMemberList(param);
     }
 
-    @GetMapping("/selectMemberOne")
+    @GetMapping("/member/selectMemberOne")
     public Member selectMemberOne(@RequestParam HashMap<String, Object> param) {
         return memberService.selectMemberOne(param);
     }
 
-    @PostMapping("/insertMember")
+    @PostMapping("/member/insertMember")
     public HashMap<String, Object> insertMember(@RequestParam HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.insertMember(param));
         return result;
     }
 
-    @PutMapping("/updateMember")
+    @PutMapping("/member/updateMember")
     public HashMap<String, Object> updateMember(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
 
@@ -59,7 +59,7 @@ public class MemberController {
         return result;
     }
 
-    @PutMapping("/deleteMember")
+    @PutMapping("/admin/deleteMember")
     public HashMap<String, Object> deleteMember(@RequestBody HashMap<String, Object> param) {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("result", memberService.deleteMember(param));
@@ -67,7 +67,7 @@ public class MemberController {
     }
 
     //회원가입
-    @RequestMapping(value = "/join", method = RequestMethod.POST)
+    @RequestMapping(value = "/member/join", method = RequestMethod.POST)
     public HashMap<String, Object> signUpMember(@RequestParam HashMap<String, Object> param) throws Exception {
 
         HashMap<String, Object> result = new HashMap<String, Object>();

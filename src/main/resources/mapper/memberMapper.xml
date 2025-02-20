@@ -27,7 +27,8 @@
     <!-- 회원 단일 조회 -->
     <select id="selectMemberOne" parameterType="HashMap" resultType="Member">
         SELECT
-         USER_ID
+        MEMBER_ID
+        , USER_ID
         , PASSWORD
         , USER_NAME
         , BIRTH
