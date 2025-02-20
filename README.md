@@ -44,4 +44,4 @@ https://documenter.getpostman.com/view/17400613/2sAYXFhHDV
 <br>
 
 
-🔗 **프론트엔드 리포지토리:** 👉 [**JoyRecord Client**](https://github.com/pjeasu/joyRecord_client)
+🔗 **클라이언트(프론트엔드) 리포지토리:** 👉 [**JoyRecord Client**](https://github.com/pjeasu/joyRecord_client)
