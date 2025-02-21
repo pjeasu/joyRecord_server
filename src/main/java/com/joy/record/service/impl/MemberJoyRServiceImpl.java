@@ -33,10 +33,7 @@ public class MemberJoyRServiceImpl implements MemberJoyRService {
     @Override
     public int upsertMemberJoyR(List<HashMap<String, Object>> param) {
         int resultNum = 0;
-
-        String member_id = param.get(0).get("member_id").toString();
         for (HashMap<String, Object> joyMap : param) {
-            joyMap.put("member_id", member_id);
             memberJoyRMapper.upsertMemberJoyR(joyMap);
             resultNum += memberJoyRMapper.upsertMemberJoyR(joyMap);
         }
