@@ -30,4 +30,16 @@ public class JoyServiceImpl implements JoyService {
         return joyMapper.updateJoy(param);
     }
 
+    @Override
+    public List<Joy> selectJoyCount(HashMap<String, Object> param) {
+        return joyMapper.selectJoyCount(param);
+    }
+
+
+    @Override
+    public List<Joy> selectJoyCountMonth(HashMap<String, Object> param) {
+        return joyMapper.selectJoyCountMonth(param);
+    }
+
+
 }

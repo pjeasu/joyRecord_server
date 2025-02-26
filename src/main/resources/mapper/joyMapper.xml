@@ -55,4 +55,52 @@
     </update>
 
 
+    <!-- 조이 차트 :  전체기간(올 한 해) 동안 취미 갯수 조회-->
+    <select id="selectJoyCount" parameterType="HashMap" resultType="Joy">
+        SELECT
+            J.JOY_ID,
+            count(J.JOY_ID) AS COUNT,
+            JOY_NAME
+        FROM joyRecord_DB.BOARD B
+        LEFT OUTER JOIN JOY J ON B.JOY_ID = J.JOY_ID
+        <where>
+            JOY_DATE BETWEEN DATE_FORMAT(CURDATE(), '%Y-01-01')
+            AND DATE_FORMAT(CURDATE(), '%Y-12-31')
+            AND J.DEL_YN = 'N'
+            AND B.DEL_YN = 'N'
+            <if test='member_id != null and  member_id != ""'>
+                AND MEMBER_ID = #{member_id}
+            </if>
+        </where>
+        GROUP BY J.JOY_ID
+    </select>
+
+
+
+
+    <!-- 조이 차트 :  전체기간(올 한 해) 동안 월 별 취미 갯수 -->
+    <select id="selectJoyCountMonth" parameterType="HashMap" resultType="Joy">
+        WITH RECURSIVE MONTHS AS (
+            SELECT DATE_FORMAT(CURDATE(), '%Y-01-01') AS MONTH
+                UNION ALL
+            SELECT DATE_ADD(month, INTERVAL 1 MONTH)
+            FROM MONTHS
+            WHERE MONTH <![CDATA[ < ]]> DATE_FORMAT(CURDATE(), '%Y-12-31')
+        )
+        SELECT
+            DATE_FORMAT(M.MONTH, '%Y-%m') AS MONTH,
+            COUNT(B.JOY_DATE) AS COUNT
+        FROM MONTHS M
+        LEFT JOIN BOARD B
+        ON DATE_FORMAT(B.JOY_DATE, '%Y-%m') = DATE_FORMAT(M.MONTH, '%Y-%m')
+        <if test='member_id != null and  member_id != ""'>
+            AND B.MEMBER_ID = #{member_id}
+        </if>
+        WHERE YEAR(M.MONTH) = YEAR(CURDATE())
+        GROUP BY M.MONTH
+        ORDER BY M.MONTH
+    </select>
+
+
+
 </mapper>

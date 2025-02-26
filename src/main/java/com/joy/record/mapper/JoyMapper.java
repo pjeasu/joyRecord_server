@@ -12,7 +12,8 @@ public interface JoyMapper {
     List<Joy> selectJoyList(HashMap<String, Object> param);
     int insertJoy(HashMap<String, Object> param);
     int updateJoy(HashMap<String, Object> param);
-    int deleteJoy(HashMap<String, Object> param);
+    List<Joy> selectJoyCount(HashMap<String, Object> param);
+    List<Joy> selectJoyCountMonth(HashMap<String, Object> param);
 
 }
 

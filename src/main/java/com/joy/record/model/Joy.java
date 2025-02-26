@@ -15,4 +15,8 @@ public class Joy {
     private int member_id;
     private String color;
 
+    // 조이차트
+    private int count;
+    private String month;
+
 }

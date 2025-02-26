@@ -18,7 +18,7 @@
         , ROLE
         FROM MEMBER
         <where>
-            <if test='del_yn != null and  del_yn != ""'>
+            <if test='del_yn != null and del_yn != ""'>
                 AND DEL_YN = #{del_yn}
             </if>
         </where>

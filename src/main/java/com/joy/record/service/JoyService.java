@@ -10,5 +10,9 @@ public interface JoyService {
     public List<Joy> selectJoyList(HashMap<String, Object> param);
     public int insertJoy(HashMap<String, Object> param);
     public int updateJoy(HashMap<String, Object> param);
+    public List<Joy> selectJoyCount(HashMap<String, Object> param);
+    public List<Joy> selectJoyCountMonth(HashMap<String, Object> param);
+
+
 
 }

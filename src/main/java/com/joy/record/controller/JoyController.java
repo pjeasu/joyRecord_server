@@ -35,4 +35,15 @@ public class JoyController {
         return result;
     }
 
+    @GetMapping("/selectJoyCount")
+    public List<Joy> selectJoyCount(@RequestParam HashMap<String, Object> param) {
+        return joyService.selectJoyCount(param);
+    }
+
+    @GetMapping("/selectJoyCountMonth")
+    public List<Joy> selectJoyCountMonth(@RequestParam HashMap<String, Object> param) {
+        return joyService.selectJoyCountMonth(param);
+    }
+
+
 }

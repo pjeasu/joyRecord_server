@@ -53,7 +53,6 @@ public class MemberController {
             param.put("password",encodePw);
         }
 
-        System.out.println(param);
         result.put("result", memberService.updateMember(param));
 
         return result;
