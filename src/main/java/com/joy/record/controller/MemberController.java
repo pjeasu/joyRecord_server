@@ -26,6 +26,8 @@ public class MemberController {
 
     @GetMapping("/admin/selectMemberList")
     public List<Member> selectMemberList(@RequestParam HashMap<String, Object> param) {
+        System.out.println("//////////////selectMemberList/////////////");
+
         return memberService.selectMemberList(param);
     }
 

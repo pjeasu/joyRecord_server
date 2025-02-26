@@ -37,6 +37,8 @@ public class JoyController {
 
     @GetMapping("/selectJoyCount")
     public List<Joy> selectJoyCount(@RequestParam HashMap<String, Object> param) {
+        System.out.println("//////////////JoyCount/////////////");
+
         return joyService.selectJoyCount(param);
     }
 
