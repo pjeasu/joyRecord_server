@@ -18,6 +18,7 @@ public class JoyController {
 
     @GetMapping("/selectJoyList")
     public List<Joy> selectJoyList(@RequestParam HashMap<String, Object> param) {
+        System.out.println("//////////////selectJoyList/////////////");
         return joyService.selectJoyList(param);
     }
 
