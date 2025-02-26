@@ -22,12 +22,13 @@ public class MemberController {
     @Autowired
     private PasswordEncoder pwEncoder;
 
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/admin/selectMemberList")
     public List<Member> selectMemberList(@RequestParam HashMap<String, Object> param) {
-        System.out.println("//////////////selectMemberList/////////////");
-
+        logger.info("=======================selectMemberList");
+        logger.info(String.valueOf(param));
         return memberService.selectMemberList(param);
     }
 

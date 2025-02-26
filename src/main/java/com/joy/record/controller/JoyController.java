@@ -2,6 +2,8 @@ package com.joy.record.controller;
 
 import com.joy.record.model.Joy;
 import com.joy.record.service.JoyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +17,15 @@ public class JoyController {
     @Autowired
     private JoyService joyService;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/selectJoyList")
     public List<Joy> selectJoyList(@RequestParam HashMap<String, Object> param) {
-        System.out.println("//////////////selectJoyList/////////////");
+
+        logger.info("=======================selectJoyList");
+        logger.info(String.valueOf(param));
+
+
         return joyService.selectJoyList(param);
     }
 
@@ -38,7 +45,8 @@ public class JoyController {
 
     @GetMapping("/selectJoyCount")
     public List<Joy> selectJoyCount(@RequestParam HashMap<String, Object> param) {
-        System.out.println("//////////////JoyCount/////////////");
+        logger.info("=======================selectJoyCount");
+        logger.info(String.valueOf(param));
 
         return joyService.selectJoyCount(param);
     }
