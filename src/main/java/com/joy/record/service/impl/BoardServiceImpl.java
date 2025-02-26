@@ -24,18 +24,12 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public List<Board> selectBoardList(HashMap<String, Object> param) {
-        logger.info("=======================selectBoardList");
-        logger.info(String.valueOf(param));
-
         return boardMapper.selectBoardList(param);
     }
 
     @Override
     @Transactional
     public List<Board> selectBoardCalList(HashMap<String, Object> param) {
-        logger.info("=======================selectBoardCalList");
-        logger.info(String.valueOf(param));
-
         return boardMapper.selectBoardCalList(param);
     }
 
@@ -53,7 +47,6 @@ public class BoardServiceImpl implements BoardService {
     }
     @Override
     public int updateBoard(HashMap<String, Object> param) {
-
         return boardMapper.updateBoard(param);
     }
 

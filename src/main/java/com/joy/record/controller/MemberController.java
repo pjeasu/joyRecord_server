@@ -27,8 +27,6 @@ public class MemberController {
 
     @GetMapping("/admin/selectMemberList")
     public List<Member> selectMemberList(@RequestParam HashMap<String, Object> param) {
-        logger.info("=======================selectMemberList");
-        logger.info(String.valueOf(param));
         return memberService.selectMemberList(param);
     }
 

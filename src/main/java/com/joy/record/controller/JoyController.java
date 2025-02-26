@@ -21,11 +21,6 @@ public class JoyController {
 
     @GetMapping("/selectJoyList")
     public List<Joy> selectJoyList(@RequestParam HashMap<String, Object> param) {
-
-        logger.info("=======================selectJoyList");
-        logger.info(String.valueOf(param));
-
-
         return joyService.selectJoyList(param);
     }
 
@@ -45,9 +40,6 @@ public class JoyController {
 
     @GetMapping("/selectJoyCount")
     public List<Joy> selectJoyCount(@RequestParam HashMap<String, Object> param) {
-        logger.info("=======================selectJoyCount");
-        logger.info(String.valueOf(param));
-
         return joyService.selectJoyCount(param);
     }
 
