@@ -42,7 +42,7 @@
                 AND B.DEL_YN = #{del_yn}
             </if>
         </where>
-        ORDER BY JOY_DATE DESC
+        ORDER BY ID DESC
     </select>
 
     <!-- 게시글 목록 조회 : 캘린더 -->
