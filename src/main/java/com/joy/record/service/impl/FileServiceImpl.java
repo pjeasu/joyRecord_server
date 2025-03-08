@@ -7,13 +7,7 @@ import com.joy.record.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 @Service
@@ -26,77 +20,46 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private BoardFileRMapper boardFileRMapper;
 
-    private final Path rootLocation = Paths.get("/mnt/ebs/uploads");
     /**
-     * 여러 파일을 업로드하고 메타데이터를 데이터베이스에 저장
+     * 파일을 업로드하고 메타데이터를 데이터베이스에 저장
      *
-     * @param files array of files to be uploaded
+     * @param file to be uploaded
      * @return list of uploaded file metadata
      */
-    public List<AttachFile> uploadFiles(MultipartFile[] files, String param) {
-        List<AttachFile> uploadedFiles = new ArrayList<>();
+    public AttachFile uploadFiles(MultipartFile file, HashMap<String, Object> param) {
 
+        AttachFile attachFile = new AttachFile();
         try {
-            for (MultipartFile file : files) {
-                // 파일의 MIME 타입 검사
-                String contentType = file.getContentType();
-                if (!isImageFile(contentType)) {
-                    throw new IllegalArgumentException("이미지 파일만 업로드할 수 있습니다.");
-                }
-
-                AttachFile attachFile = new AttachFile();
-                String originalFileName = file.getOriginalFilename();
-                String fileName = originalFileName;
-                Path filePath = rootLocation.resolve(fileName);
-
-                // 디렉토리가 존재하는지 확인하고 없으면 생성
-                Files.createDirectories(rootLocation);
-
-
-                System.out.println("Directory created or already exists: " + rootLocation);
-
-                // 파일 복사 시 로그 추가
-                Files.copy(file.getInputStream(), filePath);
-                System.out.println("File saved at: " + filePath.toString());
-
-
-                // 중복되는 파일 이름 처리
-                int counter = 1;
-                while (Files.exists(filePath)) {
-                    String fileExtension = getFileExtension(originalFileName);
-                    String baseName = originalFileName.substring(0, originalFileName.length() - fileExtension.length());
-                    fileName = baseName + "(" + counter + ")" + fileExtension;
-                    filePath = rootLocation.resolve(fileName);
-                    counter++;
-                }
-
-                // 파일을 대상 위치에 복사
-                Files.copy(file.getInputStream(), filePath);
-
-                // 파일 메타데이터를 설정합니다.
-                attachFile.setFile_name(fileName);
-                attachFile.setFile_type(file.getContentType());
-                attachFile.setFile_path(filePath.toString());
-
-                // 파일 메타데이터를 데이터베이스에 삽입
-                attachFileMapper.insertAttachFile(attachFile);
-
-                // 위에서 insert 된 첨부 파일 아이디와 등록된 게시글 아이디를 릴레이션 테이블에 insert
-                int chk = 0;
-                HashMap<String, Object> relParam = new HashMap<String, Object>();
-                relParam.put("board_id", param);
-                relParam.put("file_id", attachFile.getFile_id());
-                boardFileRMapper.insertBoardFileR(relParam);
-
-                // 결과 리스트에 파일 메타데이터를 추가
-                uploadedFiles.add(attachFile);
+            // 파일의 MIME 타입 검사
+            String contentType = file.getContentType();
+            if (!isImageFile(contentType)) {
+                throw new IllegalArgumentException("이미지 파일만 업로드할 수 있습니다.");
             }
+            String originalFileName = file.getOriginalFilename();
+
+            // 업로드된 파일의 URL
+            String fileUrl = param.get("fileUrl").toString();
+            String new_board_id = param.get("new_board_id").toString();
+
+            // 파일 메타데이터 설정
+            attachFile.setFile_name(originalFileName);
+            attachFile.setFile_type(contentType);
+            attachFile.setFile_path(fileUrl);  // S3 URL 저장
+
+            // 파일 메타데이터를 DB에 저장
+            attachFileMapper.insertAttachFile(attachFile);
+
+            // 게시글과 파일을 연결하는 테이블에 데이터 추가
+            HashMap<String, Object> relParam = new HashMap<>();
+            relParam.put("board_id", new_board_id);
+            relParam.put("file_id", attachFile.getFile_id());
+            boardFileRMapper.insertBoardFileR(relParam);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return uploadedFiles;
+        return attachFile;
     }
 
     /**

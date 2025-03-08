@@ -52,6 +52,10 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.2'
+	implementation 'software.amazon.awssdk:s3:2.20.152'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.657'
+
+
 }
 
 tasks.named('test') {
