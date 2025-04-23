@@ -1,7 +1,10 @@
+version: "3.8"
+
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8.0.33
     container_name: mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "0000"
       MYSQL_DATABASE: joyRecord_DB
@@ -17,6 +20,7 @@ services:
       - "mysqld"
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
+      - "--default-authentication-plugin=mysql_native_password"
 
   spring-boot-app:
     build: .
@@ -34,6 +38,7 @@ services:
 
 volumes:
   mysql-data:
+    external: true
 
 networks:
   joyrecord_server_default:
