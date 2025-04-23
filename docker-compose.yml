@@ -15,7 +15,7 @@ services:
     networks:
       - joyrecord_server_default
     volumes:
-      - mysql-data:/var/lib/mysql
+      - /mnt/ebs/mysql/mysql/mysql:/var/lib/mysql
     command:
       - "mysqld"
       - "--character-set-server=utf8mb4"
