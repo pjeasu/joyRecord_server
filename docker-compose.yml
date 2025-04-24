@@ -5,6 +5,8 @@ services:
     image: mysql:8.0.33
     container_name: mysql
     restart: always
+    networks:
+      - joyrecord_server_default
     environment:
       MYSQL_ROOT_PASSWORD: "0000"
       MYSQL_DATABASE: joyRecord_DB
@@ -23,6 +25,8 @@ services:
   spring-boot-app:
     build: .
     container_name: spring-boot-app
+    networks:
+      - joyrecord_server_default
     ports:
       - "8080:8080"
     depends_on:
@@ -38,3 +42,4 @@ volumes:
 
 networks:
   joyrecord_server_default:
+    driver: bridge
