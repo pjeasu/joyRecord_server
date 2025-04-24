@@ -12,8 +12,6 @@ services:
       MYSQL_PASSWORD: 0000
     ports:
       - "3306:3306"
-    networks:
-      - default
     volumes:
       - /mnt/ebs/mysql/mysql/mysql:/var/lib/mysql
     command:
@@ -25,8 +23,6 @@ services:
   spring-boot-app:
     build: .
     container_name: spring-boot-app
-    networks:
-      - default
     ports:
       - "8080:8080"
     depends_on:
