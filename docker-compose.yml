@@ -37,4 +37,4 @@ volumes:
     external: true
 
 networks:
-  default:
+  joyrecord_server_default:
