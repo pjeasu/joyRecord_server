@@ -2,6 +2,8 @@ package com.joy.record.model;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class Member {
     private int member_id;
@@ -9,7 +11,7 @@ public class Member {
     private String password;
     private String user_name;
     private String del_yn;
-    private int birth;
+    private LocalDateTime birth;
     private String email;
     private int file_id;
 
