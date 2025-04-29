@@ -11,7 +11,7 @@ services:
       MYSQL_ROOT_PASSWORD: "0000"
       MYSQL_DATABASE: joyRecord_DB
       MYSQL_USER: joy_user
-      MYSQL_PASSWORD: joy1234
+      MYSQL_PASSWORD: joy1214
     ports:
       - "3306:3306"
     volumes:
@@ -34,7 +34,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: joy_user
-      SPRING_DATASOURCE_PASSWORD: joy1234
+      SPRING_DATASOURCE_PASSWORD: joy1214
 
 volumes:
   mysql-data:
