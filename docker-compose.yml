@@ -15,7 +15,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /root/mysql/data:/var/lib/mysql
+      - /mnt/ebs/mysql/mysql/mysql:/var/lib/mysql
     command:
       - "mysqld"
       - "--character-set-server=utf8mb4"
@@ -32,7 +32,7 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&encrypt=true&trustServerCertificate=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/joyRecord_DB?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 0000
 
