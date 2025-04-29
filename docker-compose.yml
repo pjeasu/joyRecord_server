@@ -15,7 +15,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /mnt/ebs/mysql/mysql/mysql:/var/lib/mysql
+      - /root/mysql/data:/var/lib/mysql
     command:
       - "mysqld"
       - "--character-set-server=utf8mb4"
