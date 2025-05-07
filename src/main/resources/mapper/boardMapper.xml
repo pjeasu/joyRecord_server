@@ -136,7 +136,7 @@
         )
         VALUES
         (
-         (SELECT nextval('BOARD_ID') AS BOARD_ID from DUAL)
+        #{board_id}
         , #{title}
         , #{board_text}
         , #{joy_date}

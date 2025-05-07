@@ -30,7 +30,7 @@
         )
         VALUES
         (
-        (SELECT nextval('JOY_ID') AS JOY_ID from DUAL)
+        #{joy_id}
         , #{joy_name}
         , #{detail}
         , 'N'

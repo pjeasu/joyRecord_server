@@ -14,7 +14,7 @@
         )
         VALUES
         (
-            (SELECT nextval ('FILE_ID') AS FILE_ID from DUAL)
+            #{file_id}
             , #{file_name}
             , #{file_type}
             , #{file_path}
