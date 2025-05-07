@@ -119,8 +119,7 @@
     <!-- 게시글 등록 -->
     <insert id="insertBoard" parameterType="HashMap" >
         INSERT INTO BOARD
-        (BOARD_ID
-        , TITLE
+        (TITLE
         , BOARD_TEXT
         , JOY_DATE
         , CREATED_DATE
@@ -136,8 +135,7 @@
         )
         VALUES
         (
-        #{board_id}
-        , #{title}
+        #{title}
         , #{board_text}
         , #{joy_date}
         , NOW()

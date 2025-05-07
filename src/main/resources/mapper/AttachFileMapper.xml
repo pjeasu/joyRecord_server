@@ -7,15 +7,13 @@
     <insert id="insertAttachFile">
         INSERT INTO ATTACH_FILE
         (
-            FILE_ID
-            , FILE_NAME
+            FILE_NAME
             , FILE_TYPE
             , FILE_PATH
         )
         VALUES
         (
-            #{file_id}
-            , #{file_name}
+             #{file_name}
             , #{file_type}
             , #{file_path}
         )

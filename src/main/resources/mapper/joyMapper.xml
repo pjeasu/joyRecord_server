@@ -23,15 +23,14 @@
     <!-- 취미 등록 -->
     <insert id="insertJoy" parameterType="HashMap">
         INSERT INTO JOY
-        (JOY_ID
-        , JOY_NAME
+        (
+        JOY_NAME
         , DETAIL
         , DEL_YN
         )
         VALUES
         (
-        #{joy_id}
-        , #{joy_name}
+        #{joy_name}
         , #{detail}
         , 'N'
         )
