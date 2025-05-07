@@ -25,7 +25,7 @@ public class FileUploadController {
     private FileService fileService;
 
     @PostMapping("/upload")
-    public HashMap<String, Object> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("param") String param) {
+    public HashMap<String, Object> uploadFile(@RequestParam(value="file", required = false) MultipartFile file, @RequestParam("param") String param) {
         HashMap<String, Object> response = new HashMap<>();
 
         // 파일 업로드 서비스 호출
