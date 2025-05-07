@@ -151,7 +151,7 @@
         )
 
         <selectKey keyProperty="board_id" resultType="Integer" order="AFTER">
-            SELECT CURRVAL FROM SEQUENCES WHERE NAME = 'BOARD_ID'
+            SELECT MAX(BOARD_ID) FROM BOARD
         </selectKey>
 
     </insert>

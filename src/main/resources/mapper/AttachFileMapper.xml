@@ -18,7 +18,7 @@
             , #{file_path}
         )
         <selectKey keyProperty="file_id" resultType="Integer" order="AFTER">
-            SELECT CURRVAL FROM SEQUENCES WHERE NAME = 'FILE_ID'
+            SELECT MAX(FILE_ID) FROM ATTACH_FILE
         </selectKey>
     </insert>
 
