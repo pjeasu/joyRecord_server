@@ -22,6 +22,17 @@ PC 화면 기준으로 만들어졌고 모바일 화면은 현재 작업중입�
 JoyRecord 서버는 **Spring Boot** 기반으로, MySQL을 활용한 데이터 관리 및 JWT 인증 시스템을 사용했습니다. 
 
 <br>
+<table>
+  <tr>
+    <td><img width="100%" alt="화면 캡처_캘린더화면" src="https://github.com/user-attachments/assets/f46bd0ac-4503-4183-baf9-37c3657a6bd8" /></td>
+    <td><img width="100%" alt="화면 캡처_글상세보기" src="https://github.com/user-attachments/assets/e8f03727-910c-485a-9ab1-a0ad6bbf8c90" /></td>
+  </tr>
+  <tr>
+    <td><img width="100%" alt="화면 캡처_리스트" src="https://github.com/user-attachments/assets/828046f1-43d8-43b0-846e-d3ebbfdc4461" /></td>
+    <td><img width="100%" alt="화면 캡처_조이차트" src="https://github.com/user-attachments/assets/b97d3c9e-1e66-4b45-91a1-dd7524eb09a9" /></td>
+  </tr>
+</table>
+<br>
 
 ## 🛠️ 기술 스택  
 - **Backend:** Spring Boot 3, Spring Security, Mybatis  
